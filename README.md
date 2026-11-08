@@ -5,19 +5,24 @@ An automated spreadsheet auditing and valuation forensic engine that detects str
 ## Directory Architecture
 
 ```
-02_financial_model_audit/
+financial-model-audit/
 ├── README.md
 ├── audit_findings_report.md
+├── requirements.txt
+├── pyproject.toml
+├── Makefile
 ├── src/
 │   ├── __init__.py
 │   ├── generate_models.py
 │   ├── formula_scanner.py
 │   └── valuation_bridge.py
-└── output/
-    ├── target_model_v1_flawed.xlsx
-    ├── target_model_v2_audited.xlsx
-    ├── audit_discrepancy_log.csv
-    └── error_attribution_waterfall.png
+├── output/
+│   ├── target_model_v1_flawed.xlsx
+│   ├── target_model_v2_audited.xlsx
+│   ├── audit_discrepancy_log.csv
+│   └── error_attribution_waterfall.png
+└── tests/
+    └── test_model_audit.py
 ```
 
 ## Audit Scope & Injected Model Errors
@@ -37,13 +42,16 @@ The audit suite evaluates two programmatic Excel models:
 
 ```bash
 # Generate flawed (v1) and audited (v2) Excel workbooks
-python 02_financial_model_audit/src/generate_models.py
+python src/generate_models.py
 
 # Run automated formula scanner and export discrepancy log
-python 02_financial_model_audit/src/formula_scanner.py
+python src/formula_scanner.py
 
 # Compute step-by-step valuation bridge and generate waterfall chart
-python 02_financial_model_audit/src/valuation_bridge.py
+python src/valuation_bridge.py
+
+# Execute test suite
+pytest -v
 ```
 
 ## Summary of Valuation Bridge Attribution
